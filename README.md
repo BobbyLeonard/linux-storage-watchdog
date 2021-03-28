@@ -7,3 +7,6 @@ Edit the directoy to watch, *dirToWatch* and the KB limit size of directory, *di
 Place the .service file in the /lib/systemd/system/ directory<br/>
 Edit the location of the .py file in ExecStart<br/><br/>
 
+sudo systemctl daemon-reload
+sudo systemctl enable storageWatchdog.service	
+sudo systemctl start storageWatchdog.service	
