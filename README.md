@@ -4,8 +4,8 @@ Watchdog service to monitor the size of a directory and automatically delete obj
 <br/>Place the .py file where you like<br/>
 Edit the directory to watch, *dirToWatch* and the KB limit size of directory, *dirKByteLimit*<br/><br/>
 
-Place the .service file in the /lib/systemd/system/ directory<br/>
-Edit the location of the .py file in ExecStart<br/><br/>
+Place the .service file in the */lib/systemd/system/* directory<br/>
+Edit the location of the .py file in *ExecStart*<br/><br/>
 
 *sudo systemctl daemon-reload<br/>
 sudo systemctl enable storageWatchdog.service<br/>
