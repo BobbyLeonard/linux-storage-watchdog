@@ -1,7 +1,10 @@
 #!/usr/bin/python3
-import subprocess 
-import time
+
 from datetime import datetime
+from subprocess import check_output
+from subprocess import run
+from time import sleep
+
 
 # Edit these to suit !
 dirToWatch='/home/bobby/storage'
@@ -18,14 +21,14 @@ def writeLogs(stringToWrite):
 def getDirSize():
 	command='du -s {}'.format(dirToWatch)
 	commandSplitList=[x for x in command.split()]
-	output=subprocess.check_output(commandSplitList)
+	output=check_output(commandSplitList)
 	KByteSizeOfDir=output.decode("utf-8").split()[0]
 	return int(KByteSizeOfDir)
 
 def getSubDirsInDir():
 	command='ls -lthr {}'.format(dirToWatch)
 	commandSplitList=[x for x in command.split()]
-	output=subprocess.check_output(commandSplitList)
+	output=check_output(commandSplitList)
 	dirContains=output.decode("utf-8").split('\n')
 	ASCtimeSortedSubDirs=[]
 	for subDir in dirContains[1:-1]:
@@ -39,11 +42,15 @@ while True:
 			ASCtimeSortedSubDirs=getSubDirsInDir()
 			command='rm -rf {}/{}'.format(dirToWatch, ASCtimeSortedSubDirs[0])
 			commandSplitList=[x for x in command.split()]
-			output=subprocess.run(commandSplitList)
+			output=run(commandSplitList)
 			writeLogs(command)
 			KByteSizeOfDir=getDirSize()
 		except Exception as e:
-			writeLogs(e)
+			writeLogs(str(e))
 			continue
 	else:
-		time.sleep(10)
+		try:
+			sleep(10)
+		except Exception as e:
+			writeLogs(str(e))
+			continue
