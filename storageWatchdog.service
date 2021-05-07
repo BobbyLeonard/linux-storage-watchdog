@@ -7,6 +7,8 @@ Conflicts=getty@tty1.service
 Type=simple
 ExecStart=/usr/bin/python /home/bobby/storageWatchdog.py
 StandardInput=tty-force
+Restart=on-failure
+RestartSec=20s
 
 [Install]
 WantedBy=multi-user.target
